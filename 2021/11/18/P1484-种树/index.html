@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rudolph-hawk.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="为什么每次考试的原题我都没做过呀， $QAQ$">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P1484 种树">
+<meta property="og:url" content="https://rudolph-hawk.github.io/2021/11/18/P1484-%E7%A7%8D%E6%A0%91/index.html">
+<meta property="og:site_name" content="Luckyleaves&#39;s Blog">
+<meta property="og:description" content="为什么每次考试的原题我都没做过呀， $QAQ$">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/lp5cVaDb3EAfhW4.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/McZyx5Y3tqnIQa4.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/Sk6M9U1Pqgcvy4x.png">
+<meta property="og:image" content="https://i.loli.net/2021/11/18/HxPfvF7bKog6eGT.png">
+<meta property="article:published_time" content="2021-11-18T10:44:08.000Z">
+<meta property="article:modified_time" content="2021-11-18T12:00:44.000Z">
+<meta property="article:author" content="Luckyleaves">
+<meta property="article:tag" content="luogu">
+<meta property="article:tag" content="带悔贪心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/11/18/lp5cVaDb3EAfhW4.png">
+
+<link rel="canonical" href="https://rudolph-hawk.github.io/2021/11/18/P1484-%E7%A7%8D%E6%A0%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>P1484 种树 | Luckyleaves's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Luckyleaves's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Noip rp++</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://rudolph-hawk.github.io/2021/11/18/P1484-%E7%A7%8D%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Luckyleaves">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luckyleaves's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          P1484 种树
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-11-18 18:44:08 / Modified: 20:00:44" itemprop="dateCreated datePublished" datetime="2021-11-18T18:44:08+08:00">2021-11-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>为什么每次考试的原题我都没做过呀， $QAQ$</p>
+<span id="more"></span>
+
+<h1 id="solution"><a href="#solution" class="headerlink" title="solution"></a>solution</h1><p><del>当我们看到这道题时，不难想到这是一道 $dp$ 题</del>。 开个玩笑， $2e5$ 的数据范围，怎么可能 $n ^ 2 Dp$ 。 </p>
+<p>回到正题：一道经典的带悔贪心。</p>
+<p>我们先模拟一下一般的贪心策略，每次选取最大的可取的值，直到不能取为止。</p>
+<p>不难发现，这个策略是错的。我们来看一下这个图：</p>
+<p><img src="https://i.loli.net/2021/11/18/lp5cVaDb3EAfhW4.png" alt="无标题.png"></p>
+<p>对于第一次策略，我们会优先选择最大的20号点，紧接着，我们就只能憋屈的选择1号点，很明显正解不可能是21， $19+19 = 38$ 明显更优，那么我们应该怎样调整我们的贪心策略才能保证我们贪心的正确性呢，其实并不是很难，我们重新看一幅图。</p>
+<p><img src="https://i.loli.net/2021/11/18/McZyx5Y3tqnIQa4.png" alt="无标题.png"></p>
+<p>对于这次贪心策略，我们取走20以后顺手删除（左）19点和（右）19点，并将20号点更新为： $19 + 19 - 20 = 18$ ，即：</p>
+<p><img src="https://i.loli.net/2021/11/18/Sk6M9U1Pqgcvy4x.png" alt="无标题.png"></p>
+<p>此时，我们再取走18号点，并删除与18号点相邻的1号点，并将 $-17$ 号点加入队列中：</p>
+<p><img src="https://i.loli.net/2021/11/18/HxPfvF7bKog6eGT.png" alt="无标题.png"></p>
+<p>根据题目的意思，现在我们无论取多少都无所谓，所以放弃-17，得到答案38正解，这样不但避免了选择相邻的两个（选一个的时候，另外两个被删除了），还保证了价值守恒（请自行理解），那么这道题就完结撒花啦。</p>
+<h2 id="三倍经验：luogu-P1792-国家集训队-种树，-luogu-P3620-APIO-CTSC-2007-数据备份-此题具有一定的思考难度-主要还是板子"><a href="#三倍经验：luogu-P1792-国家集训队-种树，-luogu-P3620-APIO-CTSC-2007-数据备份-此题具有一定的思考难度-主要还是板子" class="headerlink" title="三倍经验：luogu P1792 [国家集训队]种树， luogu P3620 [APIO/CTSC 2007] 数据备份(此题具有一定的思考难度 (主要还是板子))"></a>三倍经验：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1792">luogu P1792 [国家集训队]种树</a>， <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3620">luogu P3620 [APIO/CTSC 2007] 数据备份</a>(此题具有一定的思考难度 (主要还是板子))</h2><h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> l, r;<span class="comment">//上一个和下一个的下标  </span></span><br><span class="line">	LL val;</span><br><span class="line">&#125;a[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id;</span><br><span class="line">	LL val;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(Node b)<span class="keyword">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> val &lt; b.val;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line">LL ans;</span><br><span class="line"><span class="keyword">bool</span> vis[N];<span class="comment">//判断当前节点是否可选</span></span><br><span class="line">priority_queue&lt;Node&gt;q;<span class="comment">//大根堆维护最大值 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Del</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a[x].l = a[a[x].l].l;<span class="comment">//左右边界移动，删除 x的左右节点 </span></span><br><span class="line">	a[x].r = a[a[x].r].r;</span><br><span class="line">	a[a[x].l].r = x;</span><br><span class="line">	a[a[x].r].l = x;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i ++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>, &amp;a[i].val);</span><br><span class="line">		a[i].l = i - <span class="number">1</span>;</span><br><span class="line">		a[i].r = i + <span class="number">1</span>;</span><br><span class="line">		q.<span class="built_in">push</span>((Node)&#123;i, a[i].val&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= m;i ++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(vis[q.<span class="built_in">top</span>().id]) <span class="comment">//延迟删除标记 </span></span><br><span class="line">			q.<span class="built_in">pop</span>();</span><br><span class="line">		Node now = q.<span class="built_in">top</span>();</span><br><span class="line">		q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(now.val &lt; <span class="number">0</span>) <span class="keyword">break</span>; </span><br><span class="line">		ans += now.val;</span><br><span class="line">		vis[a[now.id].l] = vis[a[now.id].r] = <span class="number">1</span>;</span><br><span class="line">		a[now.id].val = a[a[now.id].l].val + a[a[now.id].r].val - a[now.id].val; </span><br><span class="line">		q.<span class="built_in">push</span>((Node)&#123;now.id, a[now.id].val&#125;);<span class="comment">//加入新点 </span></span><br><span class="line">		<span class="built_in">Del</span>(now.id);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/luogu/" rel="tag"># luogu</a>
+              <a href="/tags/%E5%B8%A6%E6%82%94%E8%B4%AA%E5%BF%83/" rel="tag"># 带悔贪心</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/17/CF453C/" rel="prev" title="CF453C">
+      <i class="fa fa-chevron-left"></i> CF453C
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/22/Noip2021%E6%B8%B8%E8%AE%B0/" rel="next" title="Noip2021游记">
+      Noip2021游记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#solution"><span class="nav-number">1.</span> <span class="nav-text">solution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%80%8D%E7%BB%8F%E9%AA%8C%EF%BC%9Aluogu-P1792-%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F-%E7%A7%8D%E6%A0%91%EF%BC%8C-luogu-P3620-APIO-CTSC-2007-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD-%E6%AD%A4%E9%A2%98%E5%85%B7%E6%9C%89%E4%B8%80%E5%AE%9A%E7%9A%84%E6%80%9D%E8%80%83%E9%9A%BE%E5%BA%A6-%E4%B8%BB%E8%A6%81%E8%BF%98%E6%98%AF%E6%9D%BF%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">三倍经验：luogu P1792 [国家集训队]种树， luogu P3620 [APIO&#x2F;CTSC 2007] 数据备份(此题具有一定的思考难度 (主要还是板子))</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Luckyleaves"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Luckyleaves</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luckyleaves</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
