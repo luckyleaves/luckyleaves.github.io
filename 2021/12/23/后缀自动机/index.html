@@ -20,14 +20,18 @@
     var CONFIG = {"hostname":"rudolph-hawk.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="后缀数组都没懂得蒻犇就被巨佬们卷来听后缀自动机，太难了QWQ">
+<meta property="og:type" content="article">
 <meta property="og:title" content="后缀自动机">
 <meta property="og:url" content="https://rudolph-hawk.github.io/2021/12/23/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/index.html">
 <meta property="og:site_name" content="Luckyleaves&#39;s Blog">
+<meta property="og:description" content="后缀数组都没懂得蒻犇就被巨佬们卷来听后缀自动机，太难了QWQ">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-23T10:54:48.000Z">
-<meta property="article:modified_time" content="2021-12-23T10:54:50.000Z">
+<meta property="article:modified_time" content="2021-12-23T13:30:30.000Z">
 <meta property="article:author" content="Luckyleaves">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://rudolph-hawk.github.io/2021/12/23/%E5%90%8E%E7%BC%80%E8%87%AA%E5%8A%A8%E6%9C%BA/">
@@ -97,7 +101,7 @@
       <h1 class="site-title">Luckyleaves's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">Noip rp++</p>
+      <p class="site-subtitle" itemprop="description">一只在whk中挣扎的蒻犇</p>
   </div>
 
   <div class="site-nav-right">
@@ -211,7 +215,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-12-23 18:54:48 / Modified: 18:54:50" itemprop="dateCreated datePublished" datetime="2021-12-23T18:54:48+08:00">2021-12-23</time>
+              <time title="Created: 2021-12-23 18:54:48 / Modified: 21:30:30" itemprop="dateCreated datePublished" datetime="2021-12-23T18:54:48+08:00">2021-12-23</time>
             </span>
 
           
@@ -225,7 +229,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>后缀数组都没懂得蒻犇就被巨佬们卷来听后缀自动机，太难了QWQ</p>
+<span id="more"></span>
+
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><h2 id="SAM的性质"><a href="#SAM的性质" class="headerlink" title="SAM的性质"></a>SAM的性质</h2><ul>
+<li>$SAM$ 是一个状态机。一个起点，若干终点。原串的所有的字串和从 $SAM$ 起点开始的所有路径一一对应，不重不漏。所以终点就是包含所有后缀的点。</li>
+<li>每个点包含若干字串，每个子串都一一对应一条从起点到该点的路径。且这些字串一定是里面最长字串的连续后缀。</li>
+</ul>
+<h3 id="SAM问题中经常考虑的两种边"><a href="#SAM问题中经常考虑的两种边" class="headerlink" title="SAM问题中经常考虑的两种边"></a>SAM问题中经常考虑的两种边</h3><ul>
+<li>普通边，类似于 $Trie$。表示在某个状态所表示的所有字串的后面添加一个字串。</li>
+<li>$Link$、$Father$。表示将某个状态所表示的最短字串的首字母删除。这类边构成一棵树。</li>
+</ul>
+<h2 id="SAM的构造思路"><a href="#SAM的构造思路" class="headerlink" title="SAM的构造思路"></a>SAM的构造思路</h2><ul>
+<li>$endpos(s)$：子串s所有出现的位置（尾字母下标）集合。$SAM$ 中的每个状态都一一对应一个 $endpos$ 的等价类。</li>
+</ul>
+<h3 id="endpos的性质："><a href="#endpos的性质：" class="headerlink" title="endpos的性质："></a>endpos的性质：</h3><ul>
+<li>令 $s1,s2$ 为 S 的两个子串 ，不妨设 $|s1|≤|s2|$ （我们用 $|s|$ 表示 $s$ 的长度 ，此处等价于 $s_1$ 不长于 $s_2$ ）。则 $s_1$ 是 $s_2$ 的后缀当且仅当 $endpos(s_1)⊇endpos(s_2)$ ，$s_1$ 不是 $s_2$ 的后缀当且仅当  $endpos(s_1)∩endpos(s_2)=∅$　。</li>
+<li>两个不同子串的 $endpos$，要么有包含关系，要么没有交集。</li>
+<li>两个子串的 $endpos$ 相同，那么短串为长串的后缀。</li>
+<li>对于一个状态 $st$ ，以及任意的 $longest(st)$ 的后缀 $s$ ，如果 $s$ 的长度满足：$|shortest(st)|≤|s|≤|longsest(st)|$ ，那么 $s∈substrings(st)$ 。</li>
+</ul>
+<h2 id="SAM的构造过程"><a href="#SAM的构造过程" class="headerlink" title="SAM的构造过程"></a>SAM的构造过程</h2><ul>
+<li>分类讨论，具体看板书。</li>
+<li>证明较为复杂，略。</li>
+</ul>
+<h2 id="SAM时间复杂度"><a href="#SAM时间复杂度" class="headerlink" title="SAM时间复杂度"></a>SAM时间复杂度</h2><ul>
+<li>线性。</li>
+</ul>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> tot = <span class="number">1</span>, last = <span class="number">1</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> len, fa;</span><br><span class="line">	<span class="keyword">int</span> ch[<span class="number">26</span>];</span><br><span class="line">&#125;node[N];</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line">LL f[N];</span><br><span class="line">LL ans;</span><br><span class="line"><span class="keyword">int</span> idx;</span><br><span class="line"><span class="keyword">int</span> e[N], ne[N], h[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">extend</span><span class="params">(<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p = last, np = last = ++ tot; <span class="comment">// 插入新状态</span></span><br><span class="line">	f[tot] = <span class="number">1</span>;</span><br><span class="line">	node[np].len = node[p].len + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(; p &amp;&amp; !node[p].ch[c]; p = node[p].fa) node[p].ch[c] = np;</span><br><span class="line">	<span class="keyword">if</span>(!p) node[np].fa = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">int</span> q = node[p].ch[c];</span><br><span class="line">		<span class="keyword">if</span>(node[q].len == node[p].len + <span class="number">1</span>) node[np].fa = q;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">int</span> nq = ++ tot;</span><br><span class="line">			node[nq] = node[q], node[nq].len = node[p].len + <span class="number">1</span>;</span><br><span class="line">			node[q].fa = node[np].fa = nq;</span><br><span class="line">			<span class="keyword">for</span>(; p &amp;&amp; node[p].ch[c] == q; p = node[p].fa) node[p].ch[c] = nq;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	idx ++;</span><br><span class="line">	e[idx] = y, ne[idx] = h[x], h[x] = idx;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = h[x]; ~i; i = ne[i])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">dfs</span>(e[i]);</span><br><span class="line">		f[x] += f[e[i]];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(f[x] &gt; <span class="number">1</span>) ans = <span class="built_in">max</span>(ans, f[x] * node[x].len);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, str);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; str[i];i ++) <span class="built_in">extend</span>(str[i] - <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">	<span class="built_in">memset</span>(h, <span class="number">-1</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(h));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= tot; i ++) <span class="built_in">add</span>(node[i].fa, i);</span><br><span class="line">	<span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -233,6 +266,10 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
+          </div>
 
         
 
@@ -243,7 +280,10 @@
     <a href="/2021/12/21/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/" rel="prev" title="后缀数组">
       <i class="fa fa-chevron-left"></i> 后缀数组
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/12/26/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="next" title="多项式">
+      多项式 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -302,6 +342,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SAM%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-number">1.1.</span> <span class="nav-text">SAM的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SAM%E9%97%AE%E9%A2%98%E4%B8%AD%E7%BB%8F%E5%B8%B8%E8%80%83%E8%99%91%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%BE%B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">SAM问题中经常考虑的两种边</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAM%E7%9A%84%E6%9E%84%E9%80%A0%E6%80%9D%E8%B7%AF"><span class="nav-number">1.2.</span> <span class="nav-text">SAM的构造思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#endpos%E7%9A%84%E6%80%A7%E8%B4%A8%EF%BC%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">endpos的性质：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAM%E7%9A%84%E6%9E%84%E9%80%A0%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">SAM的构造过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SAM%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">1.4.</span> <span class="nav-text">SAM时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -317,14 +358,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -351,7 +392,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -412,6 +453,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
