@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/141392-16x16.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/141392-16x16.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="毒瘤码量类。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-19T06:34:19.000Z">
-<meta property="article:modified_time" content="2022-01-19T07:50:40.000Z">
+<meta property="article:modified_time" content="2022-01-19T23:45:24.000Z">
 <meta property="article:author" content="Luckyleaves">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="计算几何">
@@ -213,10 +213,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-01-19 14:34:19 / Modified: 15:50:40" itemprop="dateCreated datePublished" datetime="2022-01-19T14:34:19+08:00">2022-01-19</time>
+              <time title="Created: 2022-01-19 14:34:19" itemprop="dateCreated datePublished" datetime="2022-01-19T14:34:19+08:00">2022-01-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-20 07:45:24" itemprop="dateModified" datetime="2022-01-20T07:45:24+08:00">2022-01-20</time>
+              </span>
 
           
 
@@ -289,15 +295,11 @@
 <li><p>点到线段的距离</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">distance_to_segment</span><span class="params">(Point p, Point a, Point b)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (a == b) <span class="keyword">return</span> <span class="built_in">get_length</span>(p - a);</span><br><span class="line">       Vector v1 = b - a, v2 = p - a, v3 = p - b;</span><br><span class="line">       <span class="keyword">if</span> (<span class="built_in">sign</span>(<span class="built_in">dot</span>(v1, v2)) &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">get_length</span>(v2);</span><br><span class="line">       <span class="keyword">if</span> (<span class="built_in">sign</span>(<span class="built_in">dot</span>(v1, v3)) &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">get_length</span>(v3);</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">distance_to_line</span>(p, a, b);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>点在直线上的投影</p>
-<pre><code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">get_line_projection</span><span class="params">(Point p, Point a, Point b)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       Vector v = b - a;</span><br><span class="line">       <span class="keyword">return</span> a + v * (<span class="built_in">dot</span>(v, p - a) / <span class="built_in">dot</span>(v, v));</span><br><span class="line">   &#125;	</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">get_line_projection</span><span class="params">(Point p, Point a, Point b)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       Vector v = b - a;</span><br><span class="line">       <span class="keyword">return</span> a + v * (<span class="built_in">dot</span>(v, p - a) / <span class="built_in">dot</span>(v, v));</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>点是否在线段上</p>
  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">on_segment</span><span class="params">(Point p, Point a, Point b)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">sign</span>(<span class="built_in">cross</span>(p - a, p - b)) == <span class="number">0</span> &amp;&amp; <span class="built_in">sign</span>(<span class="built_in">dot</span>(p - a, p - b)) &lt;= <span class="number">0</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>判断两线段是否相交</p>
-<pre><code><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">segment_intersection</span><span class="params">(Point a1, Point a2, Point b1, Point b2)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">double</span> c1 = <span class="built_in">cross</span>(a2 - a1, b1 - a1), c2 = <span class="built_in">cross</span>(a2 - a1, b2 - a1);</span><br><span class="line">       <span class="keyword">double</span> c3 = <span class="built_in">cross</span>(b2 - b1, a2 - b1), c4 = <span class="built_in">cross</span>(b2 - b1, a1 - b1);</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">sign</span>(c1) * <span class="built_in">sign</span>(c2) &lt;= <span class="number">0</span> &amp;&amp; <span class="built_in">sign</span>(c3) * <span class="built_in">sign</span>(c4) &lt;= <span class="number">0</span>;</span><br><span class="line">   &#125; </span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">segment_intersection</span><span class="params">(Point a1, Point a2, Point b1, Point b2)</span></span></span><br><span class="line"><span class="function">   </span>&#123;</span><br><span class="line">       <span class="keyword">double</span> c1 = <span class="built_in">cross</span>(a2 - a1, b1 - a1), c2 = <span class="built_in">cross</span>(a2 - a1, b2 - a1);</span><br><span class="line">       <span class="keyword">double</span> c3 = <span class="built_in">cross</span>(b2 - b1, a2 - b1), c4 = <span class="built_in">cross</span>(b2 - b1, a1 - b1);</span><br><span class="line">       <span class="keyword">return</span> <span class="built_in">sign</span>(c1) * <span class="built_in">sign</span>(c2) &lt;= <span class="number">0</span> &amp;&amp; <span class="built_in">sign</span>(c3) * <span class="built_in">sign</span>(c4) &lt;= <span class="number">0</span>;</span><br><span class="line">   &#125; </span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="多边形"><a href="#多边形" class="headerlink" title="多边形"></a>多边形</h1><h2 id="三角形"><a href="#三角形" class="headerlink" title="三角形"></a>三角形</h2><ul>
 <li><p>面积</p>
@@ -367,7 +369,10 @@
     <a href="/2022/01/03/%E4%B8%80%E6%9C%88%E4%B8%89%E6%97%A5%E7%9C%81%E9%80%89%E9%9B%86%E8%AE%AD/" rel="prev" title="一月三日省选集训">
       <i class="fa fa-chevron-left"></i> 一月三日省选集训
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/20/%E6%9C%80%E5%B0%8F%E5%9C%86%E8%A6%86%E7%9B%96/" rel="next" title="最小圆覆盖">
+      最小圆覆盖 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -442,14 +447,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
