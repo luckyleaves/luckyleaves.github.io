@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://rudolph-hawk.github.io/2022/06/15/%E7%AC%AC%E4%BA%8C%E8%BD%AE%E8%AE%B2%E8%AF%BE/2.png">
 <meta property="og:image" content="https://rudolph-hawk.github.io/2022/06/15/%E7%AC%AC%E4%BA%8C%E8%BD%AE%E8%AE%B2%E8%AF%BE/3.png">
 <meta property="article:published_time" content="2022-06-15T08:54:49.000Z">
-<meta property="article:modified_time" content="2022-07-13T23:50:02.000Z">
+<meta property="article:modified_time" content="2022-07-17T02:45:58.000Z">
 <meta property="article:author" content="Luckyleaves">
 <meta property="article:tag" content="其他">
 <meta property="article:tag" content="块状链表">
@@ -106,7 +106,7 @@
       <h1 class="site-title">Luckyleaves's Blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">一只在whk中挣扎的蒻犇</p>
+      <p class="site-subtitle" itemprop="description">道は足元、夢は遠く</p>
   </div>
 
   <div class="site-nav-right">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-07-14 07:50:02" itemprop="dateModified" datetime="2022-07-14T07:50:02+08:00">2022-07-14</time>
+                <time title="Modified: 2022-07-17 10:45:58" itemprop="dateModified" datetime="2022-07-17T10:45:58+08:00">2022-07-17</time>
               </span>
 
           
@@ -285,7 +285,7 @@
 <p>过不了就删掉$split$函数。</p>
 <p><img src="2.png" alt="image"></p>
 <p>本人并没有被卡常，所以被卡常应该不关我事？</p>
-<h1 id="分块"><a href="#分块" class="headerlink" title="分块"></a>分块</h1><p>分块大神$Dyd$曾经说过：分块就是一种套路，你把代码每一部分换成暴力，调出一部分就全部调出来了，所以分块特别好调。</p>
+<h1 id="分块"><a href="#分块" class="headerlink" title="分块"></a>分块</h1><p>分块之神$Dyd$曾经说过：分块就是一种套路，你把代码每一部分换成暴力，调出一部分就全部调出来了，所以分块特别好调。</p>
 <p>蒟蒻不懂，可能这就是蒟蒻比巨佬菜的原因。</p>
 <h2 id="树分块"><a href="#树分块" class="headerlink" title="树分块"></a>树分块</h2><p>一般可以用其他做法碾压树分块，所以题目较少。</p>
 <h3 id="例题：P6177-Count-on-a-tree-II-【模板】树分块"><a href="#例题：P6177-Count-on-a-tree-II-【模板】树分块" class="headerlink" title="例题：P6177 Count on a tree II/【模板】树分块"></a>例题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6177">P6177 Count on a tree II/【模板】树分块</a></h3><p>树上数数的不带修的强制在线的经典问题（<del>菊花图，蒲公英可以轻松卡掉，但本人也不是很懂怎么卡</del>）。</p>
@@ -301,14 +301,24 @@
 <p><img src="3.png" alt="image"></p>
 <p>其中红色的节点表示关键节点，绿色节点表示查询节点，查询节点到最深的关键节点暴力做，最高的关键节点之间也暴力做，那么最终复杂度为：$O((n+m)\sqrt n + \frac{n^2+nm}{w})$。<del>（不知到为什么被SPOJ卡掉了）</del></p>
 <p>温馨提示，除非想不到其他解法，还是别写这个了。</p>
-<h2 id="树上莫队"><a href="#树上莫队" class="headerlink" title="树上莫队"></a>树上莫队</h2><h3 id="序列版"><a href="#序列版" class="headerlink" title="序列版"></a>序列版</h3><p>我们回顾一下上面的那道题，我们发现这样的做法及其丑陋（<del>但支持强制在线这一点就很香</del>），我们想一想如果不是强制在线的话我们应该怎么搞，首先在树上进行莫队操作的主要难点，一般来说能将树转化成序列的我们优先考虑，思考这题如何转成序列，我们使用一个叫欧拉序的东西，具体构造方法。</p>
+<h2 id="带修改莫队"><a href="#带修改莫队" class="headerlink" title="带修改莫队"></a>带修改莫队</h2><p>总所周知，普通的莫队是不能支持修改操作的，但是有些题目它就是让你支持修改，而且除了莫队你还不会其他的算法，这个时候我们就需要对莫队进行改进，让其支持修改。</p>
+<p>首先思考一个问题，如果所有的修改操作都在查询操作之前，这个问题该怎么解决呢。</p>
+<p>这其实是一个$sb$问题，将所有的修改操作维护完了，直接上普通莫队就行了。</p>
+<p>问题的关键来了，如何使我们的修改操作重复执行的操作尽可能少。</p>
+<p>有的人可能就会说了，将任意两段连续的修改操作之间的询问操作统计起来跑莫队不久行了么。</p>
+<p>这样虽然可以使修改操作执行的次数很少，但是当询问操作很少的时候（比如两次），可以轻松将复杂度卡到线性（不带根号的原因是因为询问很少），这样就能使复杂度接近$O(nm)$很挫。</p>
+<p>我们考虑定义三维：$[l, r, time]$，意味着查询的起始，终点，需要完成前$time$次修改操作。</p>
+<p>根据分块的时间复杂度平衡思想，首先考虑将序列分成$len$块，考虑将$l$，$r$都放入块中，首先按$l$的块的编号排序，然后$l$的块的序号相同的询问再按$r$的块的编号排序，$l$和$r$的块的编号都相等的再按需要修改的次数升序排序。</p>
+<p>首先为什么要这么做呢，一共有$len$块，令每块长度为$limit$（则$n$可以粗略的认为是$len\times limit$），那么移动$l$和$r$的时间复杂度为$len^2\times limit=n\times len$，之后考虑修改操作的进行次数，令总修改次数为$cnt$次，那么最坏情况下移动次数为$len^2*cnt$，双方取平衡，得到$limit=\sqrt[3]{n^4cnt}$。</p>
+<p>例题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1903">P1903 国家集训队 数颜色 / 维护队列</a></p>
+<h2 id="树上莫队"><a href="#树上莫队" class="headerlink" title="树上莫队"></a>树上莫队</h2><p>我们回顾一下树分块的那道题，我们发现这样的做法及其丑陋（<del>但支持强制在线这一点就很香</del>），我们想一想如果不是强制在线的话我们应该怎么搞，首先在树上进行莫队操作的主要难点，一般来说能将树转化成序列的我们优先考虑，思考这题如何转成序列，我们使用一个叫欧拉序的东西，具体构造方法。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对这棵树进行dfs，将任何第一次访问的节点加入序列，当节点回溯时再将这个节点加入序列。</span><br></pre></td></tr></table></figure>
 
 <p>我们回过头来重新观察这道题，设$i$节点在序列中第一次出现是$st[i]$，第二次出现是$ed[i]$，那么对于对于任意询问节点$x$，$y$，设$st[x]&lt;st[y]$，分类讨论可以得到。</p>
 <p>1.$lca(x,y)=x$，画图可以得到答案就是序列中$ed[x]\sim st[y]$之间所有只出现过一次的数所包含的不同种类（所以第一次出现就增加第二次出现就减少）。</p>
 <p>2.$lca(x,y) \ne x$，不难发现此时$y$不可能是$x$的父亲<del>（不然的话为什么st[y]不在st[x]前面）</del>，所以画个图分析，此时的$ed[x] \sim st[y]$没有包含$lca(x,y)$，特判即可。</p>
-<p>还有一道和这个题一摸一样的拓展版：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4074">[WC2013] 糖果公园</a>，快去切掉吧。</p>
-<h3 id="真树上莫队"><a href="#真树上莫队" class="headerlink" title="真树上莫队"></a>真树上莫队</h3><h2 id="倍增分块-底层线段树-底层分块"><a href="#倍增分块-底层线段树-底层分块" class="headerlink" title="倍增分块+底层线段树+底层分块"></a>倍增分块+底层线段树+底层分块</h2><p><del>自己都在怀疑赛事怎么可能有人写出来</del></p>
+<p>还有一道和这个题一摸一样的拓展版（<del>多了修改，但无伤大雅</del>）：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4074">[WC2013] 糖果公园</a>，快去切掉吧。</p>
+<h2 id="倍增分块-底层线段树-底层分块"><a href="#倍增分块-底层线段树-底层分块" class="headerlink" title="倍增分块+底层线段树+底层分块"></a>倍增分块+底层线段树+底层分块</h2><p><del>自己都在怀疑赛事怎么可能有人写出来</del></p>
 <p>$5e5$的神仙分块。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一个数列，实现如下两种操作。</span><br><span class="line">1.将[l,r]区间中所有&gt;x的数减去x。</span><br><span class="line">2.询问区间[l,r]的和，最小值，最大值。</span><br><span class="line">值域1e9，序列长度5e5</span><br></pre></td></tr></table></figure>
 
@@ -338,8 +348,19 @@
 <p>我们假设情况三的块长为$len$，由上我们发现每次修改最多会有一块成为情况三，所以最多就会操作$cnt \times \frac{len}{x}$次，我们将这式子拆开分析，首先如果每个块都已经因为上面的操作变成同一个值域了的话，显然最多会有$cnt$块需要递归，然后每一块内我们最多递归$\frac{len}{x}$次（之后就减为1了）。</p>
 <p>考虑最叼钻的情况，即$\forall x=l$的情况，$l$就是当前块的左边界，我们就要让$n \times \log n \times cnt \times \frac{len}{l}$最小，考虑固定$\frac{len}{l}$，$cnt=\log_B^{10^9}$，最终的复杂度：<br>$$<br>O((n+m) \times \log_B{10 ^ 9} \times \log n+n \times B \times \log n \times \log_B^{10^9} )<br>$$<br><del>打开几何画板，但是并没有画出来</del>，$B$的理论最优为$16$，实测的话：应该取$2 \sim 4$。</p>
 <p>之后就会发现卡空间了，线段树的空间主要消耗在叶子，我们可以设置一个常数$K$，让线段树$\le K$的区间的处理直接变成下传标记在序列上暴力，之后再上传。我们可以这样很可观地以大常数的时间代价换取空间（<del>这就是传说中底层分块</del>）。</p>
-<p>这样的话大家就可以完成[rgxsxrs]([P7447 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7447">Ynoi2007] rgxsxrs - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a>)啦。</p>
-<h1 id="二维线段树"><a href="#二维线段树" class="headerlink" title="二维线段树"></a>二维线段树</h1><h1 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>令$A$是一个矩阵，如果存在一个矩阵$B$满足：<br>$$<br>BA=I<br>$$<br>则称$A$矩阵可逆，且$B$称为$A$的逆矩阵。</p>
+<p>这样的话大家就可以完成<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P7447">rgxsxrs</a>啦。</p>
+<p>分块就先这样告一段落了，我们进入下一个专题。</p>
+<h1 id="二维线段树"><a href="#二维线段树" class="headerlink" title="二维线段树"></a>二维线段树</h1><p>这个东西考的不多（不如线段树套平衡树），时间复杂度：大常数的$n \log^2 n$，空间复杂度：$n\log n$。</p>
+<p>具体是干啥用的呢，是维护矩阵信息用的<del>（为啥不套平衡树）</del>，具体一般是对题目所给的二维的其中一维建线段树，再在这个线段树上的叶子节点建立另一颗线段树，维护另一维的信息，然后查询即可。</p>
+<p>例题：[Mosaic](<a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=4819">Problem - 4819 (hdu.edu.cn)</a>)。</p>
+<p>这里简述一下题意：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">多组数据（T &lt;= 10），每组数据需要维护一个正方形矩阵（less than: 800*800），然后多次询问，每次询问一个子矩阵中的最大值+最小值/2向下取整。</span><br><span class="line">time limit: 5000ms</span><br></pre></td></tr></table></figure>
+
+<p>是不是感觉很无脑。</p>
+<p>网络上还流传着另一种二位线段树的写法：四叉树写法，这里不过多介绍（感觉并不优秀），只引用一下定义。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">二维线段树是一棵 四叉树，树上每个结点保存 一个矩形和一个域，非叶子结点一定有 二或四 个儿子结点，儿子结点表示的 四个矩形交集为空，并集为父结点表示的 矩形；叶子结点表示的矩形长宽均为1，域则表示了需要求的数据，每个父结点的域可以通过 四个儿子结点得出。</span><br></pre></td></tr></table></figure>
+
+<h1 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>令$A$是一个矩阵，如果存在一个矩阵$B$满足：<br>$$<br>BA=I<br>$$<br>则称$A$矩阵可逆，且$B$称为$A$的逆矩阵。</p>
 <h2 id="如何求逆：高斯-约旦消元"><a href="#如何求逆：高斯-约旦消元" class="headerlink" title="如何求逆：高斯-约旦消元"></a>如何求逆：高斯-约旦消元</h2><h3 id="一堆证明"><a href="#一堆证明" class="headerlink" title="一堆证明"></a>一堆证明</h3><h4 id="矩阵的逆要么没有要么唯一"><a href="#矩阵的逆要么没有要么唯一" class="headerlink" title="矩阵的逆要么没有要么唯一"></a>矩阵的逆要么没有要么唯一</h4><p>首先要知道若$A$可逆，则逆唯一。</p>
 <p>证明：若$B$和$C$都是$A$的逆，由定义：$AB=BA=I,AC=CA=I$</p>
 <p>则：$B=IB=(AC)B=(AB)C=C$，即$B=C$，证毕。</p>
@@ -434,7 +455,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">块状链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vector%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">vector实现：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E9%93%BE"><span class="nav-number">1.2.</span> <span class="nav-text">关于主链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A%E5%B8%A6%E6%8F%92%E5%85%A5%E5%8C%BA%E9%97%B4K%E5%B0%8F%E5%80%BC"><span class="nav-number">1.3.</span> <span class="nav-text">例题：带插入区间K小值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">分块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E5%88%86%E5%9D%97"><span class="nav-number">2.1.</span> <span class="nav-text">树分块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9AP6177-Count-on-a-tree-II-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%A0%91%E5%88%86%E5%9D%97"><span class="nav-number">2.1.1.</span> <span class="nav-text">例题：P6177 Count on a tree II&#x2F;【模板】树分块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F"><span class="nav-number">2.2.</span> <span class="nav-text">树上莫队</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E7%89%88"><span class="nav-number">2.2.1.</span> <span class="nav-text">序列版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F"><span class="nav-number">2.2.2.</span> <span class="nav-text">真树上莫队</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%8D%E5%A2%9E%E5%88%86%E5%9D%97-%E5%BA%95%E5%B1%82%E7%BA%BF%E6%AE%B5%E6%A0%91-%E5%BA%95%E5%B1%82%E5%88%86%E5%9D%97"><span class="nav-number">2.3.</span> <span class="nav-text">倍增分块+底层线段树+底层分块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">二维线段树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E6%B1%82%E9%80%86"><span class="nav-number">4.</span> <span class="nav-text">矩阵求逆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%B1%82%E9%80%86%EF%BC%9A%E9%AB%98%E6%96%AF-%E7%BA%A6%E6%97%A6%E6%B6%88%E5%85%83"><span class="nav-number">4.2.</span> <span class="nav-text">如何求逆：高斯-约旦消元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%A0%86%E8%AF%81%E6%98%8E"><span class="nav-number">4.2.1.</span> <span class="nav-text">一堆证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E9%80%86%E8%A6%81%E4%B9%88%E6%B2%A1%E6%9C%89%E8%A6%81%E4%B9%88%E5%94%AF%E4%B8%80"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">矩阵的逆要么没有要么唯一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">判断矩阵是否可逆</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E5%88%A4%E6%96%AD%E6%B3%95"><span class="nav-number">4.2.1.2.1.</span> <span class="nav-text">行列式判断法</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97"><span class="nav-number">5.</span> <span class="nav-text">行列式及其运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E4%B8%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E9%80%86"><span class="nav-number">6.</span> <span class="nav-text">线性相关与矩阵的逆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9D%97%E7%8A%B6%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">块状链表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vector%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">vector实现：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E9%93%BE"><span class="nav-number">1.2.</span> <span class="nav-text">关于主链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A%E5%B8%A6%E6%8F%92%E5%85%A5%E5%8C%BA%E9%97%B4K%E5%B0%8F%E5%80%BC"><span class="nav-number">1.3.</span> <span class="nav-text">例题：带插入区间K小值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E5%9D%97"><span class="nav-number">2.</span> <span class="nav-text">分块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E5%88%86%E5%9D%97"><span class="nav-number">2.1.</span> <span class="nav-text">树分块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9AP6177-Count-on-a-tree-II-%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E6%A0%91%E5%88%86%E5%9D%97"><span class="nav-number">2.1.1.</span> <span class="nav-text">例题：P6177 Count on a tree II&#x2F;【模板】树分块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%A6%E4%BF%AE%E6%94%B9%E8%8E%AB%E9%98%9F"><span class="nav-number">2.2.</span> <span class="nav-text">带修改莫队</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E4%B8%8A%E8%8E%AB%E9%98%9F"><span class="nav-number">2.3.</span> <span class="nav-text">树上莫队</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%8D%E5%A2%9E%E5%88%86%E5%9D%97-%E5%BA%95%E5%B1%82%E7%BA%BF%E6%AE%B5%E6%A0%91-%E5%BA%95%E5%B1%82%E5%88%86%E5%9D%97"><span class="nav-number">2.4.</span> <span class="nav-text">倍增分块+底层线段树+底层分块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E7%BA%BF%E6%AE%B5%E6%A0%91"><span class="nav-number">3.</span> <span class="nav-text">二维线段树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E6%B1%82%E9%80%86"><span class="nav-number">4.</span> <span class="nav-text">矩阵求逆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%B1%82%E9%80%86%EF%BC%9A%E9%AB%98%E6%96%AF-%E7%BA%A6%E6%97%A6%E6%B6%88%E5%85%83"><span class="nav-number">4.2.</span> <span class="nav-text">如何求逆：高斯-约旦消元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%A0%86%E8%AF%81%E6%98%8E"><span class="nav-number">4.2.1.</span> <span class="nav-text">一堆证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E9%80%86%E8%A6%81%E4%B9%88%E6%B2%A1%E6%9C%89%E8%A6%81%E4%B9%88%E5%94%AF%E4%B8%80"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">矩阵的逆要么没有要么唯一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E7%9F%A9%E9%98%B5%E6%98%AF%E5%90%A6%E5%8F%AF%E9%80%86"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">判断矩阵是否可逆</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E5%88%A4%E6%96%AD%E6%B3%95"><span class="nav-number">4.2.1.2.1.</span> <span class="nav-text">行列式判断法</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E5%8F%8A%E5%85%B6%E8%BF%90%E7%AE%97"><span class="nav-number">5.</span> <span class="nav-text">行列式及其运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E4%B8%8E%E7%9F%A9%E9%98%B5%E7%9A%84%E9%80%86"><span class="nav-number">6.</span> <span class="nav-text">线性相关与矩阵的逆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text"></span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -450,14 +471,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-count">89</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">67</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
