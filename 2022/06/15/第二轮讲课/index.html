@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://rudolph-hawk.github.io/2022/06/15/%E7%AC%AC%E4%BA%8C%E8%BD%AE%E8%AE%B2%E8%AF%BE/2.png">
 <meta property="og:image" content="https://rudolph-hawk.github.io/2022/06/15/%E7%AC%AC%E4%BA%8C%E8%BD%AE%E8%AE%B2%E8%AF%BE/3.png">
 <meta property="article:published_time" content="2022-06-15T08:54:49.000Z">
-<meta property="article:modified_time" content="2022-08-10T11:48:54.019Z">
+<meta property="article:modified_time" content="2022-09-20T12:51:28.245Z">
 <meta property="article:author" content="Luckyleaves">
 <meta property="article:tag" content="其他">
 <meta property="article:tag" content="块状链表">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-08-10 19:48:54" itemprop="dateModified" datetime="2022-08-10T19:48:54+08:00">2022-08-10</time>
+                <time title="Modified: 2022-09-20 20:51:28" itemprop="dateModified" datetime="2022-09-20T20:51:28+08:00">2022-09-20</time>
               </span>
 
           
@@ -259,7 +259,6 @@
 <p>听到这个名字，大概都能猜到它的主要思想：分块。</p>
 <p>它将整个数列分成$\sqrt n$块，每一块$\sqrt n$个数用链表串起来，然后再用一个主链表将他们都传起来，具体的它长这样：</p>
 <p><img src="1.png" alt="image"></p>
-<p>仔细想想，无论怎么操作都是$\sqrt n$（维护前缀和的分裂不是）的。</p>
 <h2 id="vector实现："><a href="#vector实现：" class="headerlink" title="vector实现："></a>vector实现：</h2><ul>
 <li><p><strong>建立块状链表。</strong> 依次提取数组的前$B$元素当一个 $vector$ 添加。</p>
 </li>
@@ -289,9 +288,6 @@
 <p>蒟蒻不懂，可能这就是蒟蒻比巨佬菜的原因。</p>
 <h2 id="树分块"><a href="#树分块" class="headerlink" title="树分块"></a>树分块</h2><p>一般可以用其他做法碾压树分块，所以题目较少。</p>
 <h3 id="例题：P6177-Count-on-a-tree-II-【模板】树分块"><a href="#例题：P6177-Count-on-a-tree-II-【模板】树分块" class="headerlink" title="例题：P6177 Count on a tree II/【模板】树分块"></a>例题：<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6177">P6177 Count on a tree II/【模板】树分块</a></h3><p>树上数数的不带修的强制在线的经典问题（<del>菊花图，蒲公英可以轻松卡掉，但本人也不是很懂怎么卡</del>）。</p>
-<p>首先有一种更为简单（神秘）的做法：对于每个点拉一个$bitset$，比较显然是用轻重链剖分来维护，但是这样复杂度过大（感觉应该能过了），考虑怎么优化：对于每一条重链进行分块，预处理出每一块内$bitset$的并，复杂度：$O(m\log n \sqrt n \frac{n}{w})$甚至跑不过上面的东西，瓶颈在多块的合并，之后的操作，据题解所说可以用<code>ST</code>加速，但因它的理论复杂度应该是跑不过这道题的，只不过这东西跑不满，常数小，拿了最优解而已，我们不再深究，有兴趣的童鞋可以去看看巨佬<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/user/128141"><strong>Aestas16</strong></a>的题解。</p>
-<p>这里只是举个例，证明树分块的时间不怎么滴。</p>
-<p>下面才是正题。</p>
 <p>什么是树分块</p>
 <p>树分块就是像序列分块一样设置一个阈值$B$，然后在树上随机撒$\frac{n}{B}$个点，使其成为关键节点，然后使每一个点到距离其最近的关键节点的距离不超过$B$，这样我们就可以首先预处理出每两个关键节点之间的信息（所以树分块支持不了大量的修改操作），每次将需要计算的两点的距离最近的关键节点的信息拿出来，其他信息暴力统计即可，复杂度：$O(B^2+qB+\frac{n^2}{B})$，弱爆了。</p>
 <p>然后重点讲一下撒点：</p>
@@ -360,15 +356,15 @@
 <p>网络上还流传着另一种二位线段树的写法：四叉树写法，这里不过多介绍（感觉并不优秀），只引用一下定义。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">二维线段树是一棵 四叉树，树上每个结点保存 一个矩形和一个域，非叶子结点一定有 二或四 个儿子结点，儿子结点表示的 四个矩形交集为空，并集为父结点表示的 矩形；叶子结点表示的矩形长宽均为1，域则表示了需要求的数据，每个父结点的域可以通过 四个儿子结点得出。</span><br></pre></td></tr></table></figure>
 
-<h1 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>令$A$是一个矩阵，如果存在一个矩阵$B$满足：<br>$$<br>BA=I<br>$$<br>则称$A$矩阵可逆，且$B$称为$A$的逆矩阵。</p>
+<h1 id="矩阵求逆"><a href="#矩阵求逆" class="headerlink" title="矩阵求逆"></a>矩阵求逆</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>令$A$是一个矩阵，如果存在一个矩阵$B$满足：<br>$$<br>BA=I<br>$$<br>$I$表示只有对角线是$1$其余都是$0$的矩阵。</p>
+<p>则称$A$矩阵可逆，且$B$称为$A$的逆矩阵。</p>
 <h2 id="如何求逆：高斯-约旦消元"><a href="#如何求逆：高斯-约旦消元" class="headerlink" title="如何求逆：高斯-约旦消元"></a>如何求逆：高斯-约旦消元</h2><h3 id="一堆证明"><a href="#一堆证明" class="headerlink" title="一堆证明"></a>一堆证明</h3><h4 id="矩阵的逆要么没有要么唯一"><a href="#矩阵的逆要么没有要么唯一" class="headerlink" title="矩阵的逆要么没有要么唯一"></a>矩阵的逆要么没有要么唯一</h4><p>首先要知道若$A$可逆，则逆唯一。</p>
 <p>证明：若$B$和$C$都是$A$的逆，由定义：$AB=BA=I,AC=CA=I$</p>
 <p>则：$B=IB=(AC)B=(AB)C=C$，即$B=C$，证毕。</p>
+<p>矩阵具有结合律。</p>
 <h4 id="判断矩阵是否可逆"><a href="#判断矩阵是否可逆" class="headerlink" title="判断矩阵是否可逆"></a>判断矩阵是否可逆</h4><h5 id="行列式判断法"><a href="#行列式判断法" class="headerlink" title="行列式判断法"></a>行列式判断法</h5><p>设$n$阶矩阵：<br>$$<br>A=\begin{bmatrix}<br>a_{1,1} &amp; a_{1,2} &amp;a_{1,3} &amp; \dots &amp; a_{1, n}\\<br>a_{2,1} &amp; a_{2,2} &amp;a_{2,3} &amp; \dots &amp; a_{2, n}\\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\<br>a_{n,1} &amp; a_{n,2} &amp;a_{n,3} &amp; \dots &amp; a_{n, n}\\<br>\end{bmatrix}<br>$$<br>构造其代数余子式：<br>$$<br>A^*=\begin{bmatrix}<br>A_{1,1} &amp; A_{1,2} &amp;A_{1,3} &amp; \dots &amp; A_{1, n}\\<br>A_{2,1} &amp; A_{2,2} &amp;A_{2,3} &amp; \dots &amp; A_{2, n}\\<br>\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\<br>A_{n,1} &amp; A_{n,2} &amp;A_{n,3} &amp; \dots &amp; A_{n, n}\\<br>\end{bmatrix}<br>$$<br>代数余子式和余子式：</p>
-<p>定义： 在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/n%E9%98%B6%E8%A1%8C%E5%88%97%E5%BC%8F/3705756">n阶行列式</a>中，划去元aij所在的第i行与第j列的元，剩下的元不改变原来的顺序所构成的n-1阶行列式称为元aij的余子式。</p>
-<p>数学表示上计作$M_{i,j}$。</p>
-<p><strong>余子式定义</strong></p>
-<p> $a_{i,j}$的代数余子式 [3] ：$A_{i,j}=(-1)^{i+j}M_{i,j}$。</p>
+<p><strong>余子式</strong>：设$|A|$是一个$n$阶的行列式，划去第$i$行以及第$j$列，剩下的$(n-1)^2$个元素按照原来的顺序组成了一个发$n-1$阶行列式，这个行列式称为$|A|$的第$(i,j)$元素的余子式，称为$M_{i,j}$</p>
+<p><strong>代数余子式</strong>：设$|A|$是一个$n$阶行列式，$M_{i,j}$是第$(i,j)$元素的余子式，定义$|A|$的第$(i,j)$元素的代数余子式为：$A_y=(-1)^{i+j}|M_{i,j}|$</p>
 <h1 id="行列式及其运算"><a href="#行列式及其运算" class="headerlink" title="行列式及其运算"></a>行列式及其运算</h1><h1 id="线性相关与矩阵的逆"><a href="#线性相关与矩阵的逆" class="headerlink" title="线性相关与矩阵的逆"></a>线性相关与矩阵的逆</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2>
     </div>
 
@@ -471,14 +467,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">129</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">80</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

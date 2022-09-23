@@ -28,7 +28,7 @@
 <meta property="og:description" content="这段时间天天降智，于是开始刷CF了。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-08-05T02:56:03.000Z">
-<meta property="article:modified_time" content="2022-08-11T07:34:21.622Z">
+<meta property="article:modified_time" content="2022-09-17T03:30:16.409Z">
 <meta property="article:author" content="Luckyleaves">
 <meta property="article:tag" content="CF">
 <meta name="twitter:card" content="summary">
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-08-11 15:34:21" itemprop="dateModified" datetime="2022-08-11T15:34:21+08:00">2022-08-11</time>
+                <time title="Modified: 2022-09-17 11:30:16" itemprop="dateModified" datetime="2022-09-17T11:30:16+08:00">2022-09-17</time>
               </span>
 
           
@@ -254,7 +254,7 @@
 
 <h1 id="CF1710B-rain"><a href="#CF1710B-rain" class="headerlink" title="CF1710B rain"></a>CF1710B rain</h1><p>离散化，数学。</p>
 <p>神秘题（没见过），首先有一个<strong>结论</strong>：水量最大的点一定是降雨点。</p>
-<p><strong>证明</strong>： 对于任意相邻的降雨点$x,y ,\ x &lt; y$，对于他们之间的任意点$pos$，显然$pos$水量最大时$x$和$y$都必须要对$pos$有贡献，那么：$val_{pos}=val[x] - pos + x + val[y] + y - pos = val[x] + val[y] + y - x$，显然等于降雨点的水量。</p>
+<p><strong>证明</strong>： 对于任意相邻的降雨点$x,y ,\ x &lt; y$，对于他们之间的任意点$pos$，显然$pos$水量最大时$x$和$y$都必须要对$pos$有贡献，那么：<br>$$<br>val_{pos}=val[x] - pos + x + val[y] + y - pos = val[x] + val[y] + y - x<br>$$<br>显然等于降雨点的水量。</p>
 <p>于是我们考虑首先处理出所有降雨点的水量，降雨的式子是个一次函数，我们考虑用差分来计算，最后考虑如何验证每个点，我们考虑转化，我们重新定义一张图，这张图上的所有点的水量都是$m$，我们在原图上撤去降雨就等价于在新图上降水，而当新图和$x$轴所形成的图形可以完全将原图和$x$轴形成的图形覆盖掉，则撤去这个点就是合法的，否则不行。</p>
 <p>然后我们考虑几何法，将图形画出来时，可以发现每个最高点到左右的两条线的斜率的绝对值都是$1$，所以我们用截距表示点，预处理出原图的截距的并的范围，如果新图的截距的范围覆盖了原图，则可行，反之不行。</p>
 <p>注：计算原图截距的并的时候只用计算点值大于$m$的，正确性显然。</p>
@@ -368,14 +368,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">129</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">74</span>
+        <span class="site-state-item-count">80</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
